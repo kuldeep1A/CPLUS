@@ -31,6 +31,21 @@ private:
 
         return current;
     }
+
+    TreeNode* insertWrongRecursive(TreeNode* current, int value){
+        if (current == nullptr){
+            return new TreeNode(value);
+        } 
+
+        if (value < current->data){
+            root->right = insertWrongRecursive(current->right, value);
+        } else {
+            root->left = insertWrongRecursive(current->left, value);
+        }
+        
+        return current;
+    }
+
     void inorderTraversalRecursive(TreeNode* current){
         if (current != nullptr) {
             inorderTraversalRecursive(current->left);
@@ -61,6 +76,11 @@ public:
     void insert(int value){
         root = insertRecursive(root, value);
     }
+    
+    void insertWrong(int value){
+        root = insertWrongRecursive(root, value);
+    }
+
     TreeNode* getRoot(){
         return root;
     }
