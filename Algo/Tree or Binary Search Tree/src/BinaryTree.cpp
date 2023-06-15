@@ -56,6 +56,45 @@ private:
         }
     }
 
+    TreeNode* findMinNode(TreeNode* node){
+        while (node->left != nullptr){
+            node = node->left;
+        }
+
+        return node;
+    }
+
+    TreeNode* deleteNode(TreeNode* currNode, int val){
+        if (currNode == nullptr){
+            return currNode;
+        }
+
+        if (val < currNode->data){
+            currNode->left = deleteNode(currNode->left, val);
+        } else if (val > currNode->data){
+            currNode->right = deleteNode(currNode->right, val);
+        } else {
+            if (currNode->left == nullptr && currNode->right == nullptr){
+                delete currNode;
+                currNode = nullptr;
+            } else if (currNode->left == nullptr){
+                TreeNode* temp = currNode;
+                currNode = currNode->right;
+                delete temp;
+            } else if (currNode->right == nullptr){
+                TreeNode* temp = currNode;
+                currNode = currNode->left;
+                delete temp;
+            } else {
+                TreeNode* minNode = findMinNode(currNode->right);
+                currNode->data = minNode->data;
+                currNode->right = deleteNode(currNode->right, minNode->data);
+            }
+        }
+
+        return currNode;
+    }
+
 public:
     BinaryTree(){
         root = nullptr;
@@ -83,6 +122,9 @@ public:
         cout << endl;
     }
 
+    void deleteNode(int val){
+        root = deleteNode(root, val);
+    }
 };
 
 int main(){
@@ -99,7 +141,14 @@ int main(){
     binaryTree.insert(80);
 
     // print in various type
-    binaryTree.inorder();
     binaryTree.preorder();
     binaryTree.postorder();
+
+    cout << endl;
+    binaryTree.inorder();
+
+    // delete node 30
+    cout << "Delete Node 30" << endl;
+    binaryTree.deleteNode(30);
+    binaryTree.inorder();
 }
