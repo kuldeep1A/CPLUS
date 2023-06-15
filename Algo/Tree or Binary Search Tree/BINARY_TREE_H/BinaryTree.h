@@ -61,6 +61,12 @@ public:
     void insert(int value){
         root = insertRecursive(root, value);
     }
+    TreeNode* getRoot(){
+        return root;
+    }
+    void addRoot(TreeNode* _root){
+        root = _root;
+    }
     void inorderTraversal(){
         inorderTraversalRecursive(root);
     }
@@ -69,6 +75,10 @@ public:
     }
     void postorderTraversal(){
         postorderTraversalRecursive(root);
+    }
+
+    void _preorder(TreeNode* res){
+        preorderTraversalRecursive(res);
     }
 };
 
