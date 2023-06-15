@@ -23,7 +23,7 @@ private:
         if (currentNode == nullptr){
             currentNode = new TreeNode(Value);
         } else {
-            if (currentNode->data < Value){
+            if (Value < currentNode->data){
                 currentNode->left = insertNode(currentNode->left, Value);
             } else {
                 currentNode->right = insertNode(currentNode->right, Value);
