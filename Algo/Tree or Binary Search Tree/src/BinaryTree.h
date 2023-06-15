@@ -2,84 +2,73 @@
 
 using namespace std;
 
-class TreeNode{
+class TreeNode {
 public:
     int data;
     TreeNode* left;
     TreeNode* right;
 
-    TreeNode(int Value){
-        this->data =Value;
-        this->left = nullptr;
-        this->right = nullptr;
+    TreeNode(int value) {
+        data = value;
+        left = nullptr;
+        right = nullptr;
     }
 };
 
-class BinaryTree{
+class BinaryTree {
 private:
     TreeNode* root;
 
-    TreeNode* insertNode(TreeNode* currentNode, int Value){
-        if (currentNode == nullptr){
-            currentNode = new TreeNode(Value);
+    TreeNode* insertRecursive(TreeNode* current, int value) {
+        if (current == nullptr) {
+            return new TreeNode(value);
+        }
+
+        if (value < current->data) {
+            current->left = insertRecursive(current->left, value);
         } else {
-            if (Value < currentNode->data){
-                currentNode->left = insertNode(currentNode->left, Value);
-            } else {
-                currentNode->right = insertNode(currentNode->right, Value);
-            }
+            current->right = insertRecursive(current->right, value);
         }
-        return currentNode;
+
+        return current;
     }
 
-    void inorderTraversal(TreeNode* currentNode){
-        if (currentNode != nullptr){
-            inorderTraversal(currentNode->left);
-            cout << currentNode->data << " ";
-            inorderTraversal(currentNode->right);
-        }
-    }
-
-    void preorderTraversal(TreeNode* currentNode){
-        if (currentNode != nullptr){
-            cout << currentNode->data << " ";
-            preorderTraversal(currentNode->left);
-            preorderTraversal(currentNode->right);
-        }
-    }
-
-    void postorderTraversal(TreeNode* currentNode){
-        if (currentNode != nullptr){
-            inorderTraversal(currentNode->left);
-            inorderTraversal(currentNode->right);
-            cout << currentNode->data << " ";
+    void inorderTraversalRecursive(TreeNode* current) {
+        if (current != nullptr) {
+            inorderTraversalRecursive(current->left);
+            cout << current->data << " ";
+            inorderTraversalRecursive(current->right);
         }
     }
 
 public:
-    BinaryTree(){
+    BinaryTree() {
         root = nullptr;
     }
 
-    void insert(int Value){
-        root = insertNode(root, Value);
+    void insert(int value) {
+        root = insertRecursive(root, value);
     }
 
-    void inorder(){
-        cout << "Inorder Traversal: ";
-        inorderTraversal(root);
-        cout << endl;
-    }
-
-    void preorder(){
-        cout << "Postorder Traversal: ";
-        preorderTraversal(root);
-        cout << endl;
-    }
-
-    void postorder(){
-        cout << "Postorer Traversal: ";
-        postorderTraversal(root);
-        cout << endl;
+    void inorderTraversal() {
+        inorderTraversalRecursive(root);
     }
 };
+
+int main() {
+    BinaryTree binaryTree;
+
+    binaryTree.insert(50);
+    binaryTree.insert(30);
+    binaryTree.insert(20);
+    binaryTree.insert(40);
+    binaryTree.insert(70);
+    binaryTree.insert(60);
+    binaryTree.insert(80);
+
+    cout << "Inorder Traversal: ";
+    binaryTree.inorderTraversal();
+    cout << endl;
+
+    return 0;
+}
