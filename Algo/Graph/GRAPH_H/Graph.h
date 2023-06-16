@@ -18,7 +18,7 @@ class Edge{
             return destination;
         }
         
-        int getweight(){
+        int getWeight(){
             return weight;
         }
 };
@@ -34,6 +34,13 @@ public:
     Graph(int numVertices){
         this->numVertices = numVertices;
         AdjacencyList.resize(numVertices);
+    }
+    int getVertices(){
+        return numVertices;
+    }
+
+    vector<vector<Edge>> getAdjacencyList(){
+        return AdjacencyList;
     }
     // undirected or unweighted graph
     void addEdgeU(int source, int destination){
@@ -67,7 +74,7 @@ public:
             cout << "Vertex " << i << " -> "; 
             vector<Edge> neighbors = AdjacencyList[i];
             for(Edge neighbor: neighbors){
-                cout << neighbor.getDestination() << " ";
+                cout << "(" <<  neighbor.getDestination() << "d, "  << neighbor.getWeight() << "w) ";
             }
             cout << endl;
         }
