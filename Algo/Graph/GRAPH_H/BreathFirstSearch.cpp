@@ -13,6 +13,7 @@ public:
         vector<bool> visited(getVertices(), false);
         queue<int> queue;
 
+        visited[startVertex] = true;
         queue.push(startVertex);
         while(!queue.empty()){
             int current_vertex = queue.front();
