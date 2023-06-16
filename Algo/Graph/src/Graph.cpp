@@ -4,7 +4,7 @@ using namespace std;
 
 class Edge {
     int destination;
-    int weight;
+    int weight = 0;
 public:
     Edge(int destination) {
         this->destination = destination;
@@ -60,10 +60,10 @@ public:
 
     void printGraph() {
         for (int i = 0; i < numVertices; i++) {
-            cout << "Vertex " << i << " : ";
+            cout << "Vertex " << i << " -> ";
             vector<Edge> neighbors = adjacencyList[i];
             for (Edge neighbor : neighbors) {
-                cout << neighbor.getDestination() << " ";
+                cout << "(" <<  neighbor.getDestination() << "d, "  << neighbor.getWeight() << "w) ";
             }
             cout << endl;
         }

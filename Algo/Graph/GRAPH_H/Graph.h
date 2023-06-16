@@ -13,6 +13,14 @@ class Edge{
             this->destination = destination;
             this->weight = weight;
         }
+
+        int getDestination(){
+            return destination;
+        }
+        
+        int getweight(){
+            return weight;
+        }
 };
 
 class Graph{
@@ -56,10 +64,10 @@ public:
 
     void printGraph(){
         for (int i = 0; i < numVertices; i++){
-            cout << "Vertex " << i << " : "; 
+            cout << "Vertex " << i << " -> "; 
             vector<Edge> neighbors = AdjacencyList[i];
             for(Edge neighbor: neighbors){
-                cout << neighbor.destination << " ";
+                cout << neighbor.getDestination() << " ";
             }
             cout << endl;
         }
