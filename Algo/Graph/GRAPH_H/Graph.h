@@ -4,7 +4,7 @@ using namespace std;
 
 class Edge{
     int destination;
-    int weight;
+    int weight = 0;
     public:
         Edge(int destination){
             this->destination = destination;
