@@ -2,44 +2,84 @@
 #include <vector>
 using namespace std;
 
-class Graph
-{
+class Edge {
+    int destination;
+    int weight = 0;
+public:
+    Edge(int destination) {
+        this->destination = destination;
+    }
+
+    Edge(int destination, int weight) {
+        this->destination = destination;
+        this->weight = weight;
+    }
+
+    int getDestination(){
+        return destination;
+    }
+    int getWeight(){
+        return weight;
+    }
+};
+
+class Graph {
 private:
     int numVertices;
-    vector<vector<int>> AdjacencyList;
+    vector<vector<Edge>> adjacencyList;
 
 public:
-    Graph(int numVertices){
+    Graph(int numVertices) {
         this->numVertices = numVertices;
-        AdjacencyList.resize(numVertices);
+        adjacencyList.resize(numVertices);
     }
 
-    void addEdge(int source, int destination){
-        AdjacencyList[source].push_back(destination);
-        AdjacencyList[destination].push_back(source);
+    void addEdgeU(int source, int destination) {
+        Edge edge(destination);
+        adjacencyList[source].push_back(edge);
+        edge = Edge(source);
+        adjacencyList[destination].push_back(edge);
     }
 
-    void printGraph(){
-        for(int i = 0; i < numVertices; i++){
-            cout << "Vertex " << i << " :";
-            for(int neighbor: AdjacencyList[i]){
-                cout << neighbor << " ";
+    void addEdgeU(int source, int destination, int weight) {
+        Edge edge(destination, weight);
+        adjacencyList[source].push_back(edge);
+        edge = Edge(source, weight);
+        adjacencyList[destination].push_back(edge);
+    }
+
+    void addEdge(int source, int destination) {
+        Edge edge(destination);
+        adjacencyList[source].push_back(edge);
+    }
+
+    void addEdgeW(int source, int destination, int weight) {
+        Edge edge(destination, weight);
+        adjacencyList[source].push_back(edge);
+    }
+
+    void printGraph() {
+        for (int i = 0; i < numVertices; i++) {
+            cout << "Vertex " << i << " -> ";
+            vector<Edge> neighbors = adjacencyList[i];
+            for (Edge neighbor : neighbors) {
+                cout << "(" <<  neighbor.getDestination() << "d, "  << neighbor.getWeight() << "w) ";
             }
             cout << endl;
         }
     }
 };
 
-int main(){
-    int numVertices = 5;
+int main() {
+    Graph graph(6);
 
-    Graph graph(numVertices);
-
-    graph.addEdge(0, 1);
-    graph.addEdge(0, 2);
-    graph.addEdge(1, 3);
-    graph.addEdge(2, 3);
-    graph.addEdge(3, 4);
+    graph.addEdgeU(0, 1);
+    graph.addEdgeU(0, 4);
+    graph.addEdgeU(1, 2);
+    graph.addEdgeU(1, 3);
+    graph.addEdgeU(2, 3);
+    graph.addEdgeU(3, 4);
+    graph.addEdgeU(0, 5);
 
     graph.printGraph();
 
