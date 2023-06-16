@@ -6,19 +6,10 @@ using namespace std;
 class isSameTree{
 public:
     bool _isSameTree(TreeNode* tree1, TreeNode* tree2){
-        if (tree1 == nullptr && tree2 == nullptr){
-            return true;
-        }
-
         if (tree1 == nullptr || tree2 == nullptr){
-            return false;
+            return tree1 == tree2;
         }
-
-        if (tree1->data == tree2->data){
-            return _isSameTree(tree1->left, tree2->left) && _isSameTree(tree2->right, tree2->right);
-        }
-
-        return false;
+        return tree1->data == tree2->data && _isSameTree(tree1->left, tree2->left) && _isSameTree(tree1->right, tree2->right);
     }
 };
 
