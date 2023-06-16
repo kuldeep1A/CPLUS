@@ -18,7 +18,7 @@ class Edge{
             return destination;
         }
         
-        int getweight(){
+        int getWeight(){
             return weight;
         }
 };
@@ -67,7 +67,7 @@ public:
             cout << "Vertex " << i << " -> "; 
             vector<Edge> neighbors = AdjacencyList[i];
             for(Edge neighbor: neighbors){
-                cout << neighbor.getDestination() << " ";
+                cout << "(" <<  neighbor.getDestination() << "d, "  << neighbor.getWeight() << "w) ";
             }
             cout << endl;
         }
