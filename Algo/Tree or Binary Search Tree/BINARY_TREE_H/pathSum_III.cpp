@@ -16,7 +16,7 @@ public:
 
 class pathSum {
 public:
-    int _pathSum(TreeNode* root, int targetSum){
+    int _pathSum(TreeNode* root, long int targetSum){
         if (root == nullptr){
             return 0;
         }
@@ -25,7 +25,7 @@ public:
     }
 
 private:
-    int dfs(TreeNode* root, int targetSum){
+    int dfs(TreeNode* root, long int targetSum){
         if (root == nullptr){
             return 0;
         }
