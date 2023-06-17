@@ -5,10 +5,9 @@ class String
 {
 public:
     String() = default;
-    String(const char *string)
+    String(const char *stringd)
     {
-        m_Size = strLen(string);
-
+        m_Size = 
     }
 
 private:
