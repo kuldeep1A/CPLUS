@@ -1,4 +1,4 @@
-#include "binary_tree.h"
+#include "BinaryTree.h"
 #include <iostream>
 
 using namespace std;
