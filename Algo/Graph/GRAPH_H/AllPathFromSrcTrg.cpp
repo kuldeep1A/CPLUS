@@ -9,28 +9,36 @@ private:
 public:
     AllPathFromSrcTrg(int Vertices): Graph(Vertices){}
 
-    void dfs(vector<vector<Edge>> graph, vector<bool> visited, string path, int current, int target){
-        if (current == target){
-            paths.push_back(path);
-            return;
-        }
-
-        for (int i = 0; i < graph[current].size(); i++){
-            Edge edge = graph[current][i];
-            if(!visited[edge.getDestination()]){
-                visited[current] = true;
-                dfs(graph, visited, path + std::to_string(edge.getDestination()), edge.getDestination(), target);
-                visited[current] = false;
-            }
-        }
-    }
-
-    vector<string> AllPath(vector<vector<Edge>> graph, int current, int target){
+    vector<vector<int>> AllPath(int current, int target)
+    {
+        vector<vector<int>> paths;
         vector<bool> visited(getVertices(), false);
-        dfs(graph, visited, "0", current, target);
+        vector<int> path;
+        dfs_helper(current, target, visited, path, paths);
         return paths;
     }
+    void dfs_helper(int current, int target, vector<bool> &visited, vector<int> &path, vector<vector<int>> &paths)
+    {
+        visited[current] = true;
+        path.push_back(current);
 
+        if (current == target){
+            paths.push_back(path);
+        }
+        else
+        {
+            vector<Edge> neighbors = getAdjacencyList()[current];
+            for (Edge neighbor : neighbors)
+            {
+                if (!visited[neighbor.getDestination()])
+                {
+                    dfs_helper(neighbor.getDestination(), target, visited, path, paths);
+                }
+            }
+        }
+        path.pop_back();
+        visited[current] = false;
+    }
 };
 
 int main() {
@@ -45,8 +53,14 @@ int main() {
     graph.addEdgeU(5, 6);
     graph.printGraph();
 
-    vector<string> paths = graph.AllPath(graph.getAdjacencyList(), 0, 5);
-    for(string path: paths){
-        cout << path << " ";
+    vector<vector<int>> paths = graph.AllPath(0, 5);
+    cout << "All paths from " << 0 << " to " << 5 << ":" << endl;
+    for (const vector<int> &path : paths)
+    {
+        for (int vertex : path)
+        {
+            cout << vertex << " ";
+        }
+        cout << endl;
     }
 }
