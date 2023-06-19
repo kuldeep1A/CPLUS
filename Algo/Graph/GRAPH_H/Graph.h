@@ -28,7 +28,7 @@ private:
     int numVertices;
     int weight;
     vector<vector<Edge>> AdjacencyList;
-    vector<Edge> Edges;
+    // vector<Edge> Edges;
 
 public:
     Graph(int numVertices){
