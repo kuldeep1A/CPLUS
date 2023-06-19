@@ -2,6 +2,7 @@
 #include <iostream>
 #include <queue>
 #include <vector>
+#include <unordered_set>
 using namespace std;
 
 class BreathFirstSearch : public Graph {
@@ -9,26 +10,33 @@ class BreathFirstSearch : public Graph {
 public:
     BreathFirstSearch(int Vertices) : Graph(Vertices){}
 
-    void BFS(int startVertex){
-        vector<bool> visited(getVertices(), false);
+    vector<int> BFS(int startVertex)
+    {
+        unordered_set<int> visited;
         queue<int> queue;
+        vector<int> traversal_order;
 
-        visited[startVertex] = true;
         queue.push(startVertex);
         while(!queue.empty()){
             int current_vertex = queue.front();
             queue.pop();
-            cout << current_vertex << " ";
-            vector<Edge> neighbors = getAdjacencyList()[current_vertex];
-            for(Edge neighbor: neighbors){
-                int destination = neighbor.getDestination();
-                if (!visited[destination]){
-                    visited[destination] = true;
-                    queue.push(destination);
+            if (visited.find(current_vertex) == visited.end())
+            {
+                visited.insert(current_vertex);
+                traversal_order.push_back(current_vertex);
+
+                vector<Edge> neighbors = getAdjacencyList()[current_vertex];
+                for (Edge neighbor : neighbors)
+                {
+                    int destination = neighbor.getDestination();
+                    if (visited.find(destination) == visited.end())
+                    {
+                        queue.push(destination);
+                    }
                 }
             }
         }
-        cout << endl;
+        return traversal_order;
     }
 };
 
@@ -45,6 +53,10 @@ int main() {
     graph.addEdge(5, 6);
 
     graph.printGraph();
-    graph.BFS(0);
-
+    vector<int> res = graph.BFS(0);
+    cout << "BFS: ";
+    for (int ver : res)
+    {
+        cout << ver << " ";
+    }
 }
