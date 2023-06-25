@@ -1,4 +1,5 @@
 #include <iostream>
+#include <unordered_set>
 #include <vector>
 using namespace std;
 class Solution
@@ -6,24 +7,17 @@ class Solution
 public:
     bool hasPairWithSum(const vector<int> &arr, int target)
     {
-        int left = 0;
-        int right = arr.size() - 1;
+        unordered_set<int> comp;
 
-        while (left <= right)
+        for (int value : arr)
         {
-            int summ = arr[left] + arr[right];
-            if (summ == target)
+
+            if (comp.find(value) != comp.end())
             {
                 return true;
             }
-            else if (summ < target)
-            {
-                left += 1;
-            }
-            else
-            {
-                right -= 1;
-            }
+
+            comp.insert(target - value);
         }
         return false;
     }
@@ -31,8 +25,9 @@ public:
 
 int main()
 {
-    vector<int> arr = {1, 2, 3, 9};
-    int target = 10;
+    // vector<int> arr = {1, 2, 3, 9};
+    vector<int> arr = {3, 5, 9, 1, 2};
+    int target = 9;
 
     Solution myObj;
 
