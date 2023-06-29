@@ -11,11 +11,10 @@ public:
         unordered_set<int> hasDuplicated;
         for (int num : nums)
         {
-            if (hasDuplicated.count(num))
+            if (!hasDuplicated.insert(num).second)
             {
                 return true;
-                        }
-            hasDuplicated.insert(num);
+            }
         }
         return false;
     }
@@ -23,7 +22,7 @@ public:
 
 int main()
 {
-    vector<int> nums{1, 2, 3, 4, 5, 6};
+    vector<int> nums{1, 2, 3, 4, 5, 6, 1};
     Solution my;
     bool res = my.containsDuplicate(nums);
     cout << (res ? "true" : "false");
