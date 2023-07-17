@@ -1,6 +1,7 @@
 #include <iostream>
 #include <unordered_set>
 
+// Write a program to find pair with given sum in the array.
 bool findPairWithSum(int arr[], int size, int targetSum, int &num1, int &num2)
 {
     std::unordered_set<int> complements;
