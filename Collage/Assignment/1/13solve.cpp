@@ -1,11 +1,13 @@
 #include <iostream>
 #include <unordered_set>
+#include <vector>
 using namespace std;
 
-int findLargestConsecutiveSubarray(int arr[], int n)
+// Write a program to find largest sub-array formed by consecutive integers.
+int findLargestConsecutiveSubarray(vector<int> arr)
 {
     int maxLength = 0;
-
+    int n = arr.size();
     unordered_set<int> numSet;
 
     for (int i = 0; i < n; ++i)
@@ -17,16 +19,16 @@ int findLargestConsecutiveSubarray(int arr[], int n)
     {
         if (numSet.find(arr[i] - 1) == numSet.end())
         {
-            int currentLength = 0;
-            int currentNum = arr[i];
+            int currLength = 0;
+            int currNumber = arr[i];
 
-            while (numSet.find(currentNum) != numSet.end())
+            while (numSet.find(currNumber) != numSet.end())
             {
-                currentLength++;
-                currentNum++;
+                currLength++;
+                currNumber++;
             }
 
-            maxLength = max(maxLength, currentLength);
+            maxLength = max(maxLength, currLength);
         }
     }
 
@@ -35,20 +37,9 @@ int findLargestConsecutiveSubarray(int arr[], int n)
 
 int main()
 {
-    int n;
+    vector<int> arr{1, 2, 2, 2, 3, 4, 8, 9, 10, 11, 12, 13, 14};
 
-    cout << "Enter the number of elements in the array: ";
-    cin >> n;
-
-    int arr[n];
-
-    cout << "Enter the elements of the array:" << endl;
-    for (int i = 0; i < n; ++i)
-    {
-        cin >> arr[i];
-    }
-
-    int largestSubarrayLength = findLargestConsecutiveSubarray(arr, n);
+    int largestSubarrayLength = findLargestConsecutiveSubarray(arr);
 
     cout << "The length of the largest sub-array formed by consecutive integers is: " << largestSubarrayLength << endl;
 
