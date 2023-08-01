@@ -33,7 +33,11 @@
 
 .vscode/
 .idea/
+<<<<<<< HEAD
 secure/
 secureCrack/
 naveenC/
 
+=======
+.vs/
+>>>>>>> development
