@@ -1,0 +1,3 @@
+﻿  Source.cpp
+D:\program\c++\SDL\SDL-FIRST\SDL-FIRST\Source.cpp(49,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  SDL-FIRST.vcxproj -> D:\program\c++\SDL\SDL-FIRST\x64\Debug\SDL-FIRST.exe
