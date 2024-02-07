@@ -21,6 +21,7 @@ public:
     {
         Head = nullptr;
     }
+    
 }
 
 int main
